@@ -19,7 +19,7 @@ export class Draw extends Component {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             userToken: ''
         }
     }
@@ -27,93 +27,96 @@ export class Draw extends Component {
     componentDidMount() {
         var token = localStorage.getItem("token");
         this.setState({ userToken: token });
-        console.log("token : "+this.state.userToken);
+        console.log("token : " + this.state.userToken);
     }
 
-    handleAxis() {    
-        console.log("X : "+global.axis0);
-        console.log("Y : "+global.axis1);
+    handleAxis() {
+        console.log("X : " + global.axis0);
+        console.log("Y : " + global.axis1);
     }
 
-    handleSubmit = event => {
+    handleSubmit = async (event) => {
         console.log(this.state.userToken);
         console.log(global.xcord);
         console.log(global.ycord);
 
-          if(this.state.userToken == '') {
-              console.log("Please login first");
-              alert("Please login first");
-          }
-          else {
-              axios.post(`http://137.184.54.1:5000/api/addPattern`, {
-                  email: this.state.userToken,
-                  x_cord: global.xcord,
-                  y_cord: global.ycord
-              })
-              .then(res => {
-                  if(res.status == 200) {
-                      console.log("Pattern Saved Successful");
-                      alert("Pattern Saved Successful");
-                  }
-                  else {
-                      alert("Pattern Failed");
-                  }
-                console.log(res);
-                console.log(res.data);
-              })
+        if (this.state.userToken == '') {
+            console.log("Please login first");
+            alert("Please login first");
+        }
+        else {
+            await axios.post(`http://137.184.54.1:5000/api/addPattern`, {
+                Device: localStorage.getItem("device"),
+                Pattern: "pattern1",
+                email: this.state.userToken,
+                x: global.xcord,
+                y: global.ycord,
+
+            })
+                .then(res => {
+                    if (res.status == 200) {
+                        console.log("Pattern Saved Successful");
+                        alert("Pattern Saved Successful");
+                    }
+                    else {
+                        alert("Pattern Failed");
+                    }
+                    console.log(res);
+                    console.log(res.data);
+                })
 
             global.xcord = [];
             global.ycord = [];
-          }
+        }
     }
 
     render() {
 
         return (
-            <div className="App" style={{height: '100%'}}>
+            <div className="App" style={{ height: '100%' }}>
                 <h3><Badge bg="secondary">Draw Pattern</Badge></h3>
 
-                    <Card className="col-md-12" style={{alignItems: 'center', marginTop: '5%'}}>
-                        <div className="row" style={{justifyContent: 'space-between'}}>
-                            <Card.Title>Set Axis</Card.Title>
-                            <Card className="col-md-5">
-                                <label>X-axis</label>
-                                <Xslider />
-                            </Card>
-                            <Card className="col-md-5">
-                                <label>Y-axis</label>
-                                <Yslider />
-                            </Card>
-                        </div>
-                        <Button style={{marginTop: '1%', marginBottom: '1%'}} onClick={this.handleAxis}>Set Axis</Button>
-                    </Card>
-
-                    <Card className="col-md-12" style={{marginTop: '2%', }}>
-                        <Canvas />
-                    </Card>
-
-                    <Card className="col-md-12" style={{marginTop: '2%'}}>
-                        <Dropdown style={{marginTop: '0.5%', marginBottom: '0.5%'}}>
-                            <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                Speed
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="#/action-1">Slow</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Medium</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Fast</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Card>
-
-                    <Card className="col-md-12" style={{marginTop: '2%',}}>
-                        <input disabled style={{width: '30%', alignSelf:'center', marginTop: '1%', marginBottom: '1%'}} placeholder="Name Pattern" />
-                    </Card>
-
-                    <div className="col-md-12" style={{marginTop: '2%'}}>
-                        <Button style={{marginBottom: '10%'}} onClick={this.handleSubmit.bind(this)}>Save Pattern</Button>
+                <Card className="col-md-12" style={{ alignItems: 'center', marginTop: '5%' }}>
+                    <div className="row" style={{ justifyContent: 'space-between' }}>
+                        <Card.Title>Set Axis</Card.Title>
+                        <Card className="col-md-5">
+                            <label>X-axis</label>
+                            <Xslider />
+                        </Card>
+                        <Card className="col-md-5">
+                            <label>Y-axis</label>
+                            <Yslider />
+                        </Card>
                     </div>
-                
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={this.handleAxis}>Set Axis</Button>
+                </Card>
+
+                <Card className="col-md-12" style={{ marginTop: '2%', }}>
+                    <Canvas />
+                </Card>
+
+                <Card className="col-md-12" style={{ marginTop: '2%' }}>
+                    <Dropdown style={{ marginTop: '0.5%', marginBottom: '0.5%' }}>
+                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                            Speed
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Slow</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Medium</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Fast</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Card>
+
+                <Card className="col-md-12" style={{ marginTop: '2%', }}>
+                    <input disabled style={{ width: '30%', alignSelf: 'center', marginTop: '1%', marginBottom: '1%' }} placeholder="Name Pattern" />
+                </Card>
+
+                <div className="col-md-12" style={{ marginTop: '2%' }}>
+                    <Button style={{ marginBottom: '10%' }} onClick={this.handleSubmit.bind(this)}>Save Pattern</Button>
+                </div>
+
             </div>
         )
     }

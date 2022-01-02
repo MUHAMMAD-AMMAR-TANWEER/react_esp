@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from 'axios';
+import axios from "axios";
 
 function Signup() {
   const [password, setPassword] = useState("");
@@ -28,9 +28,7 @@ function Signup() {
 
     if (!password.match(/^[a-zA-Z]{8,22}$/)) {
       formIsValid = false;
-      setpasswordError(
-        "Only Letters and length must best min 8 Chracters"
-      );
+      setpasswordError("Only Letters and length must best min 8 Chracters");
       return false;
     } else {
       setpasswordError("");
@@ -40,26 +38,32 @@ function Signup() {
     return formIsValid;
   };
 
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
     handleValidation();
 
-    if(handleValidation()){
+    if (handleValidation()) {
       global.token = email;
       global.auth = true;
 
       localStorage.setItem("token", global.token);
-  
-      console.log(global.token+global.auth);
-  
-      history.push("/login");
+
+      console.log(global.token + global.auth);
+      await axios
+        .post("http://137.184.54.1:5000/api/signup", { email, password })
+        .then((res) => {
+          history.push("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     // if(handleValidation()) {
     //     // signup();
 
     //     if(handleValidation()) {
-    //       axios.post('http://localhost:5000/api/signup/', {
+    //       axios.post('http://137.184.54.1:5000/api/signup/', {
     //         email: email,
     //         password: password
     //       }).then(res => {
@@ -72,7 +76,6 @@ function Signup() {
   };
 
   const signup = () => {
-
     // fetch('http://137.184.54.1:5000/api/signup/', {
     //     method: 'POST',
     //     mode: 'no-cors',
@@ -86,17 +89,18 @@ function Signup() {
     //     })
     // });
 
-
     window.alert("Signup Successful");
-  }
+  };
 
   return (
     <Container className="App">
       <div className="container">
         <div className="row d-flex justify-content-center">
-          <Card className="col-md-4" style={{marginTop: '2%'}}>
+          <Card className="col-md-4" style={{ marginTop: "2%" }}>
             <legend>
-                <Card.Title style={{marginTop: '1%'}}>Register Account</Card.Title>
+              <Card.Title style={{ marginTop: "1%" }}>
+                Register Account
+              </Card.Title>
             </legend>
             <form id="loginform" onSubmit={loginSubmit}>
               <div className="form-group">
@@ -114,7 +118,7 @@ function Signup() {
                   {emailError}
                 </small>
               </div>
-              <div className="form-group" style={{marginTop: '2%'}}>
+              <div className="form-group" style={{ marginTop: "2%" }}>
                 {/* <label>Password</label> */}
                 <input
                   type="password"
@@ -135,7 +139,11 @@ function Signup() {
                 />
                 <label className="form-check-label">Check me out</label>
               </div> */}
-              <button style={{marginTop: '2%', marginBottom: '2%'}} type="submit" className="btn btn-primary">
+              <button
+                style={{ marginTop: "2%", marginBottom: "2%" }}
+                type="submit"
+                className="btn btn-primary"
+              >
                 Signup
               </button>
             </form>
