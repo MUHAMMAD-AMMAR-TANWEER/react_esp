@@ -12,7 +12,7 @@ import Tools from "./tools.js";
 import Card from 'react-bootstrap/Card';
 
 import "./styles.css";
-import { Alert } from "bootstrap";
+
 export default function Canvas() {
   const [brushColor, setBrusholor] = useState("#444");
   const [lastPenColor, setLastPenColor] = useState("#444");
@@ -85,9 +85,12 @@ export default function Canvas() {
       global.ycord.push(value);
     })
 
+    console.log(global.xcord);
+    console.log(global.ycord);
+
 
     let coordinates = [{x: x, y: y}];
-    console.log(coordinates[0]);
+    // console.log(coordinates[0]);
     // console.log(points);
     // window.alert("Coordinates are saved : "+list);
     canvasRef2.current.loadSaveData(data);

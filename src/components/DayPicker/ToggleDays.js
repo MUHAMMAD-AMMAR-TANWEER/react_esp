@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import LaserSchedule from "../../pages/Schedule";
+
 
 const DAYS = [
   {
@@ -77,6 +79,9 @@ const StyledToggle = withStyles({
 
 const ToggleDays = () => {
   const [days, setDays] = useState([0, 2, 3]);
+
+  // LaserSchedule(days);
+
   return (
     <>
       <StyledToggleButtonGroup
@@ -96,3 +101,5 @@ const ToggleDays = () => {
 };
 
 export default ToggleDays;
+
+

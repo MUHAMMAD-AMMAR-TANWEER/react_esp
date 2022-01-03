@@ -25,7 +25,7 @@ export default class AddDevice extends Component {
         this.setState({ device: event.target.value });
     }
 
-    handleSubmit = async (event) => {
+    handleSubmit = event => {
         event.preventDefault();
 
         const user = {
@@ -44,18 +44,37 @@ export default class AddDevice extends Component {
             alert("Please Login First");
         }
         else {
-            await axios.post(`http://137.184.54.1:5000/api/addDevice/`, { Device: user.Device, email: user.email })
+
+            axios.post(`http://165.227.123.50:5000/api/addDevice/`, user)
                 .then(res => {
-                    if (res.status === 200) {
+                    if (res.status == 200) {
                         console.log("Signup Successful");
                         alert("Signup Successful");
                     }
+
+
                     else {
                         alert("Signup Failed");
                     }
                     console.log(res);
                     console.log(res.data);
                 })
+                .catch(err => {
+                    axios.put(`http://165.227.123.50:5000/api/addDeviceu/`, user)
+                        .then(res => {
+                            if (res.status == 200) {
+                                console.log("Signup Successful");
+                                alert("Signup Successful");
+                            }
+                            else {
+                                alert("Signup Failed");
+                            }
+                            console.log(res);
+                            console.log(res.data);
+                        })
+                })
+
+
         }
     }
 

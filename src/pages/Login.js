@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import axios from "axios";
+import axios from 'axios';
 
 function Login() {
   const [password, setPassword] = useState("");
@@ -14,6 +14,7 @@ function Login() {
   const [passwordError, setpasswordError] = useState("");
   const [emailError, setemailError] = useState("");
   const history = useHistory();
+
 
   const handleValidation = (event) => {
     let formIsValid = true;
@@ -29,7 +30,9 @@ function Login() {
 
     if (!password.match(/^[a-zA-Z]{8,22}$/)) {
       formIsValid = false;
-      setpasswordError("Only Letters and length must best min 8 Chracters");
+      setpasswordError(
+        "Only Letters and length must best min 8 Chracters"
+      );
       return false;
     } else {
       setpasswordError("");
@@ -43,43 +46,28 @@ function Login() {
     e.preventDefault();
     handleValidation();
 
-    if (handleValidation()) {
-      global.token = email;
-      global.auth = true;
-
-      localStorage.setItem("token", global.token);
-
-      console.log(global.token + global.auth);
-
-      await axios.post("http://137.184.54.1:5000/api/login", {
-        email,
-        password,
-      }).then(res => {
-        history.push("/home");
-      }).catch(err => {
-        console.log(err);
-      });
-    }
-
     // login();
 
     if (handleValidation()) {
-      axios
-        .post("http://137.184.54.1:5000/api/login/", {
-          email: email,
-          password: password,
-        })
-        .then((res) => {
-          console.log("after login success", res.data);
-        })
-        .catch((err) => {
-          console.log("login Error", err.response);
-        });
+      axios.post('http://165.227.123.50:5000/api/login/', {
+        email: email,
+        password: password
+      }).then(res => {
+        console.log("after login success", res.data);
+
+        global.token = email;
+        localStorage.setItem("token", global.token);
+        console.log(global.token);
+
+        history.push("/home");
+      }).catch(err => {
+        console.log("login Error", err.response)
+      })
     }
 
     // console.log(resp);
 
-    // axios.post('http://137.184.54.1:5000/api/login', {
+    // axios.post('http://165.227.123.50:5000/api/login', {
     //   params: {
     //     email: "faizkhan2811997@gmail.com",
     //     password: "FaizKhan"
@@ -95,7 +83,7 @@ function Login() {
     //     // login();
 
     // try {
-    //   let response = await fetch('http://137.184.54.1:5000/api/login/', {
+    //   let response = await fetch('http://165.227.123.50:5000/api/login/', {
     //     method: "POST",
     //     mode: "no-cors",
     //     headers: {
@@ -122,31 +110,31 @@ function Login() {
     // }
   };
 
-  async function login() {
-    let item = { email, password };
+  // async function login() {
+  //   let item = { email, password };
 
-    console.log(item);
+  //   console.log(item);
 
-    let resp = await fetch("http://137.184.54.1:5000/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(item),
-    });
+  //   let resp = await fetch ('http://165.227.123.50:5000/api/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     },
+  //     body: JSON.stringify(item)
+  //   })
 
-    resp = await resp.json();
-    console.log(resp.ok);
-  }
+  //   resp = await resp.json();
+  //   console.log(resp.ok);
+  // }
 
   return (
     <Container className="App">
       <div className="container">
         <div className="row d-flex justify-content-center">
-          <Card className="col-md-4" style={{ marginTop: "2%" }}>
+          <Card className="col-md-4" style={{ marginTop: '2%' }}>
             <legend>
-              <Card.Title style={{ marginTop: "1%" }}>Login</Card.Title>
+              <Card.Title style={{ marginTop: '1%' }}>Login</Card.Title>
             </legend>
             <form id="loginform">
               <div className="form-group">
@@ -164,7 +152,7 @@ function Login() {
                   {emailError}
                 </small>
               </div>
-              <div className="form-group" style={{ marginTop: "2%" }}>
+              <div className="form-group" style={{ marginTop: '2%' }}>
                 {/* <label>Password</label> */}
                 <input
                   type="password"
@@ -185,19 +173,11 @@ function Login() {
                 />
                 <label className="form-check-label">Check me out</label>
               </div> */}
-              <a
-                href="/home"
-                style={{ marginTop: "2%", marginBottom: "2%" }}
-                onClick={loginSubmit}
-                type="submit"
-                className="btn btn-primary"
-              >
+              <a href="/home" style={{ marginTop: '2%', marginBottom: '2%' }} onClick={loginSubmit} type="submit" className="btn btn-primary">
                 Login
               </a>
             </form>
-            <a href="/signup" style={{ marginBottom: "2%" }}>
-              Signup
-            </a>
+            <a href="/signup" style={{ marginBottom: '2%' }}>Signup</a>
           </Card>
         </div>
       </div>

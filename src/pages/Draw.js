@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 // import '../components/Context/GV';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -20,13 +19,16 @@ export class Draw extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userToken: ''
+            userToken: '',
+            device: '',
+            pattern: '',
         }
     }
 
     componentDidMount() {
         var token = localStorage.getItem("token");
-        this.setState({ userToken: token });
+        var d = localStorage.getItem("device");
+        this.setState({ userToken: token, device: d });
         console.log("token : " + this.state.userToken);
     }
 
@@ -35,23 +37,37 @@ export class Draw extends Component {
         console.log("Y : " + global.axis1);
     }
 
-    handleSubmit = async (event) => {
-        console.log(this.state.userToken);
-        console.log(global.xcord);
-        console.log(global.ycord);
+    handleChange = event => {
+        this.setState({ pattern: event.target.value });
+    }
+
+    handleSubmit = event => {
+        console.log(this.state.device);
+
+        var Xarray = [];
+        var Yarray = [];
+
+        global.xcord.forEach(element => {
+            // console.log(element)
+            Xarray.push(element)
+        });
+
+        global.ycord.forEach(element => {
+            Yarray.push(element)
+        });
+
+        console.log(JSON.stringify(Xarray));
 
         if (this.state.userToken == '') {
             console.log("Please login first");
             alert("Please login first");
         }
         else {
-            await axios.post(`http://137.184.54.1:5000/api/addPattern`, {
-                Device: localStorage.getItem("device"),
-                Pattern: "pattern1",
-                email: this.state.userToken,
-                x: global.xcord,
-                y: global.ycord,
-
+            axios.post(`http://165.227.123.50:5000/api/addPattern`, {
+                Device: this.state.device,
+                Pattern: this.state.pattern,
+                x: Xarray,
+                y: Yarray
             })
                 .then(res => {
                     if (res.status == 200) {
@@ -110,7 +126,7 @@ export class Draw extends Component {
                 </Card>
 
                 <Card className="col-md-12" style={{ marginTop: '2%', }}>
-                    <input disabled style={{ width: '30%', alignSelf: 'center', marginTop: '1%', marginBottom: '1%' }} placeholder="Name Pattern" />
+                    <input onChange={this.handleChange} style={{ width: '30%', alignSelf: 'center', marginTop: '1%', marginBottom: '1%' }} placeholder="Name Pattern" />
                 </Card>
 
                 <div className="col-md-12" style={{ marginTop: '2%' }}>

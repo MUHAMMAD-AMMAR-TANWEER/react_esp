@@ -21,10 +21,14 @@ export default class Home extends Component {
         console.log("token : "+this.state.userToken);
     }
 
-    handleLogout() {
-        global.token = null;
-        global.auth = false;
-    }
+    // handleLogout() {
+    //     console.log('Logout')
+    //     console.log(global.token)
+    //     global.token = null;
+    //     global.auth = false;
+
+    //     console.log(global.token)
+    // }
 
     render() {
         return (
@@ -37,6 +41,9 @@ export default class Home extends Component {
                             <div>
                                 <label>User : {this.state.userToken}</label>
                             </div>
+                            {/* <div>
+                                <label><Button variant="link" onClick={this.handleLogout}>Logout</Button></label>
+                            </div> */}
                         </div>
                     </Card.Body>
                 </Card>
