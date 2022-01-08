@@ -25,11 +25,10 @@ function Signup() {
       setemailError("");
       formIsValid = true;
     }
-
-    if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,40}$/)) {
+    if (password.length < 6 || password.length > 40) {
       formIsValid = false;
       setpasswordError(
-        "password at least contains 6 letters one lowercase letter, one uppercase letter, one numeric digit, and one special character"
+        "Please type password greater then 6 characters and less than 40 characters"
       );
       return false;
     } else {
