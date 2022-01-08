@@ -26,10 +26,10 @@ function Signup() {
       formIsValid = true;
     }
 
-    if (!password.match(/^[a-zA-Z]{8,22}$/)) {
+    if (!password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,40}$/)) {
       formIsValid = false;
       setpasswordError(
-        "Only Letters and length must best min 8 Chracters"
+        "password at least contains 6 letters one lowercase letter, one uppercase letter, one numeric digit, and one special character"
       );
       return false;
     } else {

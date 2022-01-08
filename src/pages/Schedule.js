@@ -163,6 +163,7 @@ export default class LaserSchedule extends Component {
         console.log(this.state.userToken);
         console.log(this.state.Device);
         console.log("Date : " + JSON.stringify(this.state.Date));
+        // alert("Date : " + JSON.stringify(this.state.Date));
         console.log(this.state.selectedValue);
         console.log(this.state.selectedValue1);
         console.log(this.state.Sound);
@@ -205,7 +206,7 @@ export default class LaserSchedule extends Component {
                 <Card style={{ marginTop: '4%' }}>
                     <Card.Body className="justify-content-md-center">
                         <Card.Title>Select Date</Card.Title>
-                        <DayPickerInput onDayChange={this.handleDayChange} style={{ marginTop: '0.5%' }} placeholder="           YYYY/MM/DD" format="DD/MM/YYYY" />
+                        <DayPickerInput onDayChange={this.handleDayChange} style={{ marginTop: '0.5%' }} placeholder="DD/MM/YYYY" format="DD/MM/YYYY" />
                     </Card.Body>
                 </Card>
 
