@@ -19,7 +19,7 @@ function Login() {
   const handleValidation = (event) => {
     let formIsValid = true;
 
-    if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+    if (!email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
       formIsValid = false;
       setemailError("Email Not Valid");
       return false;
@@ -62,6 +62,7 @@ function Login() {
         history.push("/home");
       }).catch(err => {
         console.log("login Error", err.response)
+        alert("We do not recognize that password / email, please make sure the details are correct and try again")
       })
     }
 

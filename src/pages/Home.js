@@ -10,7 +10,7 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             userToken: ''
         }
     }
@@ -18,7 +18,7 @@ export default class Home extends Component {
     componentDidMount() {
         var token = localStorage.getItem("token");
         this.setState({ userToken: token });
-        console.log("token : "+this.state.userToken);
+        console.log("token : " + this.state.userToken);
     }
 
     // handleLogout() {
@@ -37,7 +37,7 @@ export default class Home extends Component {
 
                 <Card>
                     <Card.Body>
-                        <div style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <div style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <div>
                                 <label>User : {this.state.userToken}</label>
                             </div>
@@ -48,15 +48,15 @@ export default class Home extends Component {
                     </Card.Body>
                 </Card>
 
-                <div style={{marginTop: '2%'}}>
+                <div style={{ marginTop: '2%' }}>
                     <Button href="/addDevice">Add Device</Button>
                 </div>
 
-                <div style={{marginTop: '4%'}}>
-                    <Button href="/laserSchedule">Select Laser Schedule</Button>
+                <div style={{ marginTop: '4%' }}>
+                    <Button href="/laserSchedule">Play Schedule</Button>
                 </div>
 
-                <div style={{marginTop: '4%'}}>
+                <div style={{ marginTop: '4%' }}>
                     <Button href="/draw">Draw Pattern</Button>
                 </div>
             </Container>

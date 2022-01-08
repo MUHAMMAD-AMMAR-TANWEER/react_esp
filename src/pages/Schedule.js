@@ -263,7 +263,7 @@ export default class LaserSchedule extends Component {
 
                         <Dropdown style={{ marginTop: '0.5%', marginBottom: '0.5%' }}>
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                Select Week(s)
+                                Repeat Schedule
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Dropdown.Item href="#/action-3" onClick={() => { this.setState({ Status: false }) }} >Every week</Dropdown.Item>
