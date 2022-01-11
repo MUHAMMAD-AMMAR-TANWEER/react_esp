@@ -67,7 +67,8 @@ export class Draw extends Component {
                 Device: this.state.device,
                 Pattern: this.state.pattern,
                 x: Xarray,
-                y: Yarray
+                y: Yarray,
+                len: Xarray.length,
             })
                 .then(res => {
                     if (res.status == 200) {
@@ -77,6 +78,9 @@ export class Draw extends Component {
                     else {
                         alert("Pattern Failed");
                     }
+                    alert(Xarray.length);
+                    alert(Xarray)
+
                     console.log(res);
                     console.log(res.data);
                 })
