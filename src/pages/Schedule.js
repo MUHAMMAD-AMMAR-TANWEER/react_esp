@@ -111,6 +111,7 @@ export default class LaserSchedule extends Component {
             Device: '',
             Date: '',
             Sound: '',
+            Speed: '',
             Status: false,
             pattern: '',
             Day: [0, 2, 4],
@@ -184,6 +185,7 @@ export default class LaserSchedule extends Component {
                 End_Time: this.state.selectedValue1,
                 Pattern: this.state.pattern,
                 Sound: this.state.Sound,
+                Speed: this.state.Speed,
                 Status: this.state.Status,
                 Day: this.state.Day,
             })
@@ -217,7 +219,7 @@ export default class LaserSchedule extends Component {
                     <Card.Body className="justify-content-md-center">
                         <Card.Title>Start Time</Card.Title>
                         <TimePicker style={{ width: '40%', marginLeft: '30%' }} value={this.state.selectedValue}
-                            onChange={this.optionChanged} start="00:00" end="23:59" step={30} />
+                            onChange={this.optionChanged} start="00:00" end="23:59" step={1} />
                     </Card.Body>
                 </Card>
 
@@ -225,7 +227,7 @@ export default class LaserSchedule extends Component {
                     <Card.Body className="justify-content-md-center">
                         <Card.Title>End Time</Card.Title>
                         <TimePicker style={{ width: '40%', marginLeft: '30%' }} value={this.state.selectedValue1}
-                            onChange={this.optionChanged1} start="00:00" end="23:59" step={30} />
+                            onChange={this.optionChanged1} start="00:00" end="23:59" step={1} />
                     </Card.Body>
                 </Card>
 
@@ -234,6 +236,17 @@ export default class LaserSchedule extends Component {
                         <input type="radio" value="On" name="sound" /> Sound On
                         <br />
                         <input type="radio" value="Off" name="sound" /> Sound Off
+                    </div>
+                </Card>
+
+                <Card style={{ marginTop: '2%', }}>
+                    <div onChange={this.onChangeValue}>
+                        <h5>Select speed of motor</h5>
+                        <input type="radio" value="Slow" name="Speed" /> Slow
+                        <br />
+                        <input type="radio" value="Medium" name="Speed" /> Medium
+                        <br />
+                        <input type="radio" value="Fast" name="Speed" /> Fast
                     </div>
                 </Card>
 
