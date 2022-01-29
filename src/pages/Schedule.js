@@ -178,7 +178,7 @@ export default class LaserSchedule extends Component {
             alert("Please login first");
         }
         else {
-            axios.post(`http://165.227.123.50:5000/api/addSchedule`, {
+            axios.post(`http://localhost:5000/api/addSchedule`, {
                 Device: this.state.Device,
                 Date: {"Year":JSON.stringify(this.state.Date).slice(1,5),"Month":JSON.stringify(this.state.Date).slice(6,8),"Day":JSON.stringify(this.state.Date).slice(9,11)},
                 Start_Time: this.state.selectedValue,

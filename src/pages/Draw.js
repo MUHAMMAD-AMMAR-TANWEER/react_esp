@@ -22,7 +22,10 @@ export class Draw extends Component {
             userToken: '',
             device: '',
             pattern: '',
+            cord: '',
+            shift: 0
         }
+        this.handleSubmit= this.handleSubmit.bind(this)
     }
 
     componentDidMount() {
@@ -40,8 +43,59 @@ export class Draw extends Component {
     handleChange = event => {
         this.setState({ pattern: event.target.value });
     }
+    
+    handleSubmit(a,b){
+       
 
-    handleSubmit = event => {
+        var Xarray = [];
+        var Yarray = [];
+
+        global.xcord.forEach(element => {
+            // console.log(element)
+            Xarray.push(element)
+        });
+
+        global.ycord.forEach(element => {
+            Yarray.push(element)
+        });
+
+        console.log(JSON.stringify(Xarray));
+
+        console.log(a,b)
+    
+            
+            if (this.state.userToken == '') {
+                console.log("Please login first");
+                alert("Please login first");
+            }
+            else {
+                console.log("esle is working")
+                axios.put(`http://localhost:5000/api/realTime`, {
+                    Device: this.state.device,
+                    cord: a,
+                    shift: b
+                })
+                    .then(res => {
+                        if (res.status == 200) {
+                            console.log("Pattern Saved Successful");
+                            alert("Pattern Saved Successful");
+                        }
+                        else {
+                            alert("Pattern Failed");
+                        }
+                        alert(Xarray.length);
+                        alert(Xarray)
+    
+                        console.log(res);
+                        console.log(res.data);
+                    })
+                    console.log("esle is working 2")
+            }
+    
+    }
+    
+
+    handlePatternSubmit = event => {
         console.log(this.state.device);
 
         var Xarray = [];
@@ -63,7 +117,7 @@ export class Draw extends Component {
             alert("Please login first");
         }
         else {
-            axios.post(`http://165.227.123.50:5000/api/addPattern`, {
+            axios.post(`http://localhost:5000/api/addPattern`, {
                 Device: this.state.device,
                 Pattern: this.state.pattern,
                 x: Xarray,
@@ -108,7 +162,7 @@ export class Draw extends Component {
                             <Yslider />
                         </Card>
                     </div>
-                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={this.handleAxis}>Set Axis</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",0)}>Set Axis</Button>
                 </Card>
 
                 <Card className="col-md-12" style={{ marginTop: '2%', }}>
@@ -134,7 +188,7 @@ export class Draw extends Component {
                 </Card>
 
                 <div className="col-md-12" style={{ marginTop: '2%' }}>
-                    <Button style={{ marginBottom: '10%' }} onClick={this.handleSubmit.bind(this)}>Save Pattern</Button>
+                    <Button style={{ marginBottom: '10%' }} onClick={this.handlePatternSubmit.bind(this)}>Save Pattern</Button>
                 </div>
 
             </div>

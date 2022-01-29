@@ -49,7 +49,7 @@ function Login() {
     // login();
 
     if (handleValidation()) {
-      axios.post('http://165.227.123.50:5000/api/login/', {
+      axios.post('http://localhost:5000/api/login/', {
         email: email,
         password: password
       }).then(res => {
@@ -68,7 +68,7 @@ function Login() {
 
     // console.log(resp);
 
-    // axios.post('http://165.227.123.50:5000/api/login', {
+    // axios.post('http://localhost:5000/api/login', {
     //   params: {
     //     email: "faizkhan2811997@gmail.com",
     //     password: "FaizKhan"
@@ -84,7 +84,7 @@ function Login() {
     //     // login();
 
     // try {
-    //   let response = await fetch('http://165.227.123.50:5000/api/login/', {
+    //   let response = await fetch('http://localhost:5000/api/login/', {
     //     method: "POST",
     //     mode: "no-cors",
     //     headers: {
@@ -116,7 +116,7 @@ function Login() {
 
   //   console.log(item);
 
-  //   let resp = await fetch ('http://165.227.123.50:5000/api/login', {
+  //   let resp = await fetch ('http://localhost:5000/api/login', {
   //     method: 'POST',
   //     headers: {
   //       "Content-Type": "application/json",
