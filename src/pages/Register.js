@@ -58,7 +58,7 @@ function Signup() {
       // signup();
 
       if (handleValidation()) {
-        axios.post('http://localhost:5000/api/signup/', {
+        axios.post('http://165.227.123.50:5000/api/signup/', {
           email: email,
           password: password
         }).then(res => {
@@ -72,7 +72,7 @@ function Signup() {
 
   const signup = () => {
 
-    // fetch('http://localhost:5000/api/signup/', {
+    // fetch('http://165.227.123.50:5000/api/signup/', {
     //     method: 'POST',
     //     mode: 'no-cors',
     //     headers: {

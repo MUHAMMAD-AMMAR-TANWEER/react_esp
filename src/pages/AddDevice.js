@@ -45,7 +45,7 @@ export default class AddDevice extends Component {
         }
         else {
 
-            axios.post(`http://localhost:5000/api/addDevice/`, user)
+            axios.post(`http://165.227.123.50:5000/api/addDevice/`, user)
                 .then(res => {
                     if (res.status == 200) {
                         console.log("Signup Successful");
@@ -60,7 +60,7 @@ export default class AddDevice extends Component {
                     console.log(res.data);
                 })
                 .catch(err => {
-                    axios.put(`http://localhost:5000/api/addDeviceu/`, user)
+                    axios.put(`http://165.227.123.50:5000/api/addDeviceu/`, user)
                         .then(res => {
                             if (res.status == 200) {
                                 console.log("Signup Successful");

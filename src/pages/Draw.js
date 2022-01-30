@@ -70,21 +70,20 @@ export class Draw extends Component {
             }
             else {
                 console.log("esle is working")
-                axios.put(`http://localhost:5000/api/realTime`, {
+                axios.put(`http://165.227.123.50:5000/api/realTime`, {
                     Device: this.state.device,
                     cord: a,
                     shift: b
                 })
                     .then(res => {
                         if (res.status == 200) {
-                            console.log("Pattern Saved Successful");
-                            alert("Pattern Saved Successful");
+                            console.log("Shifted successfully");
+
                         }
                         else {
                             alert("Pattern Failed");
                         }
-                        alert(Xarray.length);
-                        alert(Xarray)
+
     
                         console.log(res);
                         console.log(res.data);
@@ -117,7 +116,7 @@ export class Draw extends Component {
             alert("Please login first");
         }
         else {
-            axios.post(`http://localhost:5000/api/addPattern`, {
+            axios.post(`http://165.227.123.50:5000/api/addPattern`, {
                 Device: this.state.device,
                 Pattern: this.state.pattern,
                 x: Xarray,
@@ -127,13 +126,12 @@ export class Draw extends Component {
                 .then(res => {
                     if (res.status == 200) {
                         console.log("Pattern Saved Successful");
-                        alert("Pattern Saved Successful");
+
                     }
                     else {
                         alert("Pattern Failed");
                     }
-                    alert(Xarray.length);
-                    alert(Xarray)
+
 
                     console.log(res);
                     console.log(res.data);
@@ -152,17 +150,21 @@ export class Draw extends Component {
 
                 <Card className="col-md-12" style={{ alignItems: 'center', marginTop: '5%' }}>
                     <div className="row" style={{ justifyContent: 'space-between' }}>
-                        <Card.Title>Set Axis</Card.Title>
-                        <Card className="col-md-5">
-                            <label>X-axis</label>
-                            <Xslider />
-                        </Card>
-                        <Card className="col-md-5">
-                            <label>Y-axis</label>
-                            <Yslider />
-                        </Card>
+
+
                     </div>
-                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",0)}>Set Axis</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",1)}>Right Small</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",5)}>Right Medium</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",10)}>Right Large</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",-1)}>Left Small</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",-5)}>Left Medium</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("x",-10)}>Left Large</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("y",1)}>Up small </Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("y",5)}>Up medium</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("y",10)}>Up Large</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("y",-1)}>Down Small</Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("y",-5)}>Down Medium </Button>
+                    <Button style={{ marginTop: '1%', marginBottom: '1%' }} onClick={()=>this.handleSubmit("y",-10)}>Down Large</Button>
                 </Card>
 
                 <Card className="col-md-12" style={{ marginTop: '2%', }}>
