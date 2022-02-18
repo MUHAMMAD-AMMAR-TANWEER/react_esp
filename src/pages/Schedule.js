@@ -136,10 +136,15 @@ export default class LaserSchedule extends Component {
     handleDayChange2(event, value) {
         this.setState({ Day: value })
     }
-
+    //For Speed Changing
     onChangeValue(event) {
         console.log(event.target.value);
-        this.setState({ Sound: event.target.value });
+        this.setState({ Speed: event.target.value });
+    }
+
+    onChangeValue1(event) {
+        console.log(event.target.value);
+        this.setState({Sound: event.target.value});
     }
 
     // START TIME HANDLING
@@ -232,7 +237,7 @@ export default class LaserSchedule extends Component {
                 </Card>
 
                 <Card style={{ marginTop: '2%', }}>
-                    <div onChange={this.onChangeValue}>
+                    <div onChange={this.onChangeValue1}>
                         <input type="radio" value="On" name="sound" /> Sound On
                         <br />
                         <input type="radio" value="Off" name="sound" /> Sound Off
