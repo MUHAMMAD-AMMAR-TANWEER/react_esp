@@ -72,7 +72,7 @@ export default function Canvas() {
     xcoord.forEach(element => {
       // console.log(xmax);
       // console.log(element);
-      var value = parseInt((element/xmax) * 180);
+      var value = parseInt((element/xmax) * 135);
       x.push(value);
       global.xcord.push(value);
     })
@@ -80,7 +80,7 @@ export default function Canvas() {
     ycoord.forEach(element => {
       // console.log(xmax);
       // console.log(element);
-      var value = parseInt((element/ymax) * 180);
+      var value = parseInt((element/ymax) * 135);
       y.push(value);
       global.ycord.push(value);
     })
