@@ -21,7 +21,7 @@ export default class Xslider extends React.Component {
             <input 
               id="typeinp" 
               type="range" 
-              min="0" max="180" 
+              min="45" max="135" 
               value={this.state.value} 
               onChange={this.handleChange}
               step="1"/>
